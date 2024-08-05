@@ -3,7 +3,62 @@ title: "R Notebook"
 output: html_notebook
 ---
 
+### Vektör Olusturma 
+
+Tek degerden olusan ifadeler de vektördür. Bunlara Atomik vektör denir. 1'den fazla ifade içeren vektörler ise normal vektördür.
+
 ```{r}
+a <- rep(1:2, 3)
+is.vector(a)
+
+typeof(a)
+
+a <- "ali"
+
+a <- c("ali", "veli", "isik", "uzaya gitsin")
+
+a
+
+```
+
+### Vektör Birlestirme
+
+2 türlü vektör birlestirme vardır. 
+
+1. Nümerik Anlamda Birlestirme (TOPLAMA)
+2. Vektörel Anlamda Birlestirme (UÇ UCA EKLEME)
+
+```{r}
+v <- 1:10
+y <- 2:11
+
+v + y # v'nin ilk elemani ile y'nin ilk elemanı toplanır bu sekilde son elemana kadar gider. Bütün skaler islemler gerceklestirilebilir
+
+c(v,y) # v ve y'yi birlestirir
+
+rbind(v,y) # satir bazinda birlestirir
+cbind(v,y) # sutun bazında birlestirir
+
+```
+
+
+### Vektör İndeksi ve Eleman Seçimi
+
+```{r}
+
+v <- 10:100
+
+v[8] # vektördeki 8. elemani seçer
+
+v[1:10] # vektördeki ilk 10 sayiyi seçer
+
+v[c(11,21,31)] # vektördeki 11, 21 ve 31. elemanlari seçer
+
+v[v > 50 & v < 80] # 50'den büyük 80'den kucuk elemanları seçer
+
+a <- c("ali", "veli", "isik", "uzaya gitsin")
+
+a[a == "veli"] # karakterlerden olusan vektörde veliyi seçer
 
 ```
 
