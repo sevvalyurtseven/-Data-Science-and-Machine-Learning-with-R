@@ -1,0 +1,64 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+## Matrisler
+
+Satır ve sütunlara göre düzenlenmiş sayı sembol ya da ifadelerin dikdörtgen biçiminde ifade edilmesine matris denir.
+
+### Vektör Üzerinden Matris Olusturma
+
+```{r}
+v1 <- c(3,4,6,8,5)
+v2 <- c(4,8,4,7,1)
+v3 <- c(2,2,5,4,6)
+v4 <- c(4,7,5,2,5)
+
+matris <- cbind(v1, v2, v3, v4)
+matris
+
+is.matrix(matris)
+
+matrix(1:9, nrow = 3, ncol = 3) # sutuna göre matris olusturur
+matrix(1:9, nrow = 3, ncol = 3, byrow = TRUE) # satirlara göre matris olusturur
+
+matrix(c(1,2,3,11,22,33), nrow = 2, ncol = 3) # özellestirdik
+
+m <- matrix(c(1,2,11,22,111,222,1111,2222),
+       nrow = 4,
+       ncol = 2,
+       byrow = TRUE,
+       dimnames = list(c("rakam", "onluk", "yuzluk", "binlik"), c("bir", "iki"))) # satir ve sutunlari isimlendirdik
+
+dim(m) # matrisin kaca kaclık oldugunu söyler
+
+```
+### Matris Birlestirme
+
+```{r}
+
+MA <- rnorm(16, 0, 1)
+MA <- matrix(MA, nrow = 4, ncol = 4)
+
+MB <- rnorm(16, 90, 10)
+MB <- matrix(MB, nrow = 4, ncol = 4)
+
+rbind(MA, MB) # SATIR BAZINDA BIRLESTIRME
+cbind(MA,MB) # SUTUN BAZINDA BIRLESTIRME
+```
+
+
+### Matrislerde Elemana ve Indekse Erişme
+
+```{r}
+m
+
+m[1,1]
+m[1,2]
+
+m[,2] # sütuna erişim
+m[1,] # satıra erişin
+
+```
+
