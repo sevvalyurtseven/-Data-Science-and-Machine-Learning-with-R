@@ -1,0 +1,19 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+## Fonksiyonel Programlama
+
+1. Fonksiyonlar dilin baş tacı, birinci sınıf vatandaşlardır.
+2. Fonksiyonel Saflık (Functional purity)
+3. Vektörel Fonksiyonlar
+4. Anonim Fonksiyonlar
+5. Sabit Veri Yapilari (Immutable)
+6. Özyineleme (Recursion)
+
+### R'da Fonksiyonel Programlama
+
+1. Vektörel Fonksiyonlar (vectorized functions)
+2. Yüksek Seviye Fonksiyonlar (higher-order functions)
+3. Closures
