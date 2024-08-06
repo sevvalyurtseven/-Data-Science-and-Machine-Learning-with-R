@@ -1,0 +1,34 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+## Tarih - Saat Degiskenleri
+
+```{r}
+install.packages("lubridate")
+library(lubridate)
+
+df_bir <- data.frame(yas = c(10,11,30),
+                     boy = c(120,140,160),
+                     dogum = c("20100201", "20110522", "20090430")
+                     )
+
+df_iki <- data.frame(yas = c(10,11,30),
+                     boy = c(120,140,160),
+                     dogum = c("2010_02_01", "2011_05_22", "2009_04_30")
+                     )
+
+df_uc <- data.frame(yas = c(10,11,30),
+                     boy = c(120,140,160),
+                     dogum = c("01022010", "22052011", "30042009")
+                     )
+str(df_bir) # df_bir datasinin icerisindeki degiskenlerin tiplerini göster
+
+df_bir$dogum <- ymd(df_bir$dogum) # ymd : yil-ay-gun seklinde formatlar
+df_uc$dogum <- dmy(df_uc$dogum) # dmy : gun-ay-yil seklinde formatlar
+str(df_bir)
+str(df_uc)
+mdy("11091987") # mdy : ay-gun-yil seklinde formatlar
+```
+
