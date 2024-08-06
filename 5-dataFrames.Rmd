@@ -1,0 +1,94 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+## Data Frames
+
+Farklı türden değişkenleri bir arada kullanma imkanı sunan veri tipidir.
+
+```{r}
+
+df <- data.frame(
+  magaza_no = c(1:5),
+  semt = c("Mecidiyekoy", "Bjk", "Kadikoy", "Bagcilar", "Gop"),
+  ort_kazanc = c(50,50,61,72,84)
+)
+
+str(df) # data frame icerisindeki degiskenlerin tiplerini bize gosterir
+summary(df) # özet istatistikleri verir
+ncol(df) # sutun sayisini verir
+nrow(df) # satir sayisini verir
+dim(df) # satir ve sutun sayisini verir
+
+df2 <- data.frame(
+  magaza_no = c(1:5),
+  gecmis = c(2,4,5,3,6),
+  per_sayisi = c(23,43,21,11,13)
+)
+
+merge(df, df2, all = TRUE) # 2 DATA FRAME'I BIRLESTIRIR
+df <- merge(df, df2, by = "magaza_no") # 2 data frame'de olan bir degiskene gore birlestirme
+
+cbind(df, df2) # satir bazinda birlestirme
+rbind(df, df) # sutun bazinda birlestirme!
+
+# rbind() fonksiyonunu kullanmak icin 2 DATA FRAME'IN DEGISKEN ISIMLERI AYNI OLMALIDIR! cbind() için bu kural gecerli degildir.
+
+# dolar operatoru ile degisken ekleyebiliriz veya degisken secebiliriz
+
+df$ort_musteri <- c(12,34,21,12,45)
+df$urun_turu <- c("ayakkabi", "canta", "kazak", "tisort", "ayakkabi")
+
+# degisken silme:
+
+df$urun_turu <- NULL
+
+# degiskenler uzerinden degisken olusturma
+
+df$per_basina_kazanc <- df$ort_kazanc / df$per_sayisi
+
+df
+
+# data frame isimlendirme
+
+colnames()
+rownames()
+
+```
+
+### Bir Matrisi Data Frame'e Çevirmek
+
+```{r}
+
+m <- matrix(1:9, nrow = 3, ncol = 3, byrow = TRUE)
+m
+
+df <- as.data.frame(m) # bir matrisi data frame'e cevirme
+df
+is.data.frame(df) # df bir data frame mi?
+```
+
+
+```{r}
+install.packages("ggplot2")
+library(ggplot2)
+mpg
+
+data.frame(mpg$manufacturer, mpg$model) # degisken secme
+
+mpg[1,1] # 1. satir 1. sutundaki deger
+
+mpg[1:3,] # ilk 3 gozleme ait tüm sutunlara erişmek
+
+# üreticisi audi olan ve silindir kapasitesi 6 olan bütün gözlemleri seç
+
+mpg[mpg$manufacturer == "audi" & mpg$cyl == 6, ]
+
+# data frame icerisindeki bir degere erisip o degeri degistirmek:
+
+mpg[1,1] <- "gercek"
+mpg[1,1]
+
+```
+
