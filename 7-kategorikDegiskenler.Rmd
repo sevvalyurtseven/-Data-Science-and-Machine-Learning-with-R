@@ -1,0 +1,30 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+## Kategorik Degiskenler
+
+Metin formatindaki degiskenler karakter tipinde oluyor fakat bazen karakter tipinde olsa bile bunları modelleme anlamında ele alacak oldugumuzda bu degiskenlerin karakter degil de faktor olması gerekiyor yani kategorik degisken olması gerekiyor.
+
+```{r}
+rutbe <- c("er", "onbasi", "yuzbasi", "binbasi", "albay")
+is.vector(rutbe) # vector mu?
+
+typeof(rutbe)
+
+a <- factor(rutbe) # character degiskeni kategorik hale getirdik
+a
+
+# Eger bir kategorik degisken nominal ise (örnegin cinsiyet) siniflar arasindaki farkliligin bir önemi yoktur. Fakat ordinal ise yani yukaridaki gibi ise siniflarini ayarlamamiz gerekir
+
+ordered(rutbe, levels = c("er", "onbasi", "yuzbasi", "binbasi", "albay")) # siralama islemi yaptık
+
+# veya
+
+a <- factor(rutbe,
+            levels = c("er", "onbasi", "yuzbasi", "binbasi", "albay"),
+            ordered = TRUE)
+
+```
+
