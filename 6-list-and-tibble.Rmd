@@ -1,0 +1,23 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+## Listeler ve Tibble
+
+Tibble, Data Frame'lerin modern bir versiyonu olarak görülebilir.
+Liste, farkli tiplerdeki veriler ile calisma imkanı sunar.
+Data frame, farkli türden degiskenleri bir arada tutar.
+
+```{r}
+
+L <- list("Super", "Evren", 1:10, FALSE) # liste olusturma
+
+L <- list(L,L) # 2 listeyi birlestirme
+
+# bir listenin vektöre dönüstürülmesi:
+
+a <- list(1:10)
+a <- unlist(a) # listeyi vektöre dönüstür
+```
+
