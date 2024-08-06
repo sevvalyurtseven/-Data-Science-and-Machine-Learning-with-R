@@ -1,0 +1,31 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+## Veri Okuma
+
+R içerisindeki hazır veri setlerine erişmek istediğimiz zaman data() fonksiyonunu kullan
+
+```{r}
+data(package = .packages(all.available = TRUE))
+survival
+```
+
+
+```{r}
+read.table("~/Downloads/data_sets/reading_data/duz_metin.txt", quote="\"", comment.char="")
+```
+
+```{r}
+read_delim("~/Downloads/data_sets/reading_data/ornekcsv.csv", ";", escape_double = FALSE, trim_ws = TRUE)
+```
+
+```{r}
+read_excel("~/Downloads/data_sets/reading_data/ornekx.xlsx")
+```
+
+```{r}
+read_dta("~/Downloads/data_sets/reading_data/oil.dta")
+```
+
