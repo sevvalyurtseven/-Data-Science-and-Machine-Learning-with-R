@@ -1,0 +1,122 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+## Fonksiyon Okuryazarligi ve Fonksiyonlar
+
+```{r}
+# Tek argumanli fonksiyon
+
+kare <- function(x){
+  x^2
+}
+
+# 2 argumanli fonksiyon
+
+kare_ve_carpma <- function(x,y){
+  x^2*y
+}
+
+kare_ve_carpma(9,2)
+kare(9)
+```
+
+## Döngü ve Kontrol İfadeleri - if
+
+```{r}
+
+a <- 4
+
+if(a > 5) {
+  
+  print("buyuk")
+  
+} else if(a < 5){
+  
+  print("kucuk")
+}
+
+# Best Practice
+
+ifelse(a > 5, "buyuk", "kucuk")
+
+```
+
+
+## Döngü ve Kontrol İfadeleri - for
+
+```{r}
+
+for(i in 1:5){
+  
+  print(i)
+  
+}
+
+# Vektör icinde gezinmek
+
+a <- c(1,2,3,4,5,6)
+
+for(i in a){
+  
+  print(i)
+  
+}
+
+# Faktor icerisinde gezinmek (Kategorik degisken)
+
+a <- factor(a)
+
+for(i in levels(a)){
+  
+  print(a)
+}
+```
+## Apply ve Map Ailesi 
+
+Br matris veya data frame üzerinde satir veya sutun bazında herhangi bir fonksiyon uygulamak istediginizde apply ailesi fonksiyonları kullanılır.
+
+```{r}
+# mpg veri setindeki tüm satırları alalım. Sürekli degiskenleri secelim ve sutun bazında işlem yapalım.
+
+df <- mpg[, c("displ", "cyl", "cty")]
+
+apply(df, 2, mean) # burada 1 satırı 2 sutunu ifade eder
+
+mean(df$displ) # ortalama dogru mu alindi kontrol edelim
+
+apply(df, 2, function(x) x^2) # apply fonksiyonun icerisine fonksiyon da yazabiliriz
+```
+
+## sapply()
+
+Listenin içerisindeki elemanları bir vektör olarak ulaşmak istiyorsam ve bu elemanlara bir işlem uygulamak istiyorsam kullanılır.
+
+```{r}
+l <- list(a = rnorm(90,1,2),
+          b = rbeta(10,1,2),
+          c = 1:5000 )
+
+sapply(l, mean)
+```
+
+## Map Fonksiyonları
+
+AMAC : mtcars veri setindeki cyl degiskeninin her bir sınıfına veri setini indirgeyip, bu indirgeme işleminden sonra ortaya cıkan yeni veri setlerine dogrusal regresyon modeli kurmak istiyoruz. Daha sonra kurdugumuz dogrusal regresyon modeli nesnelerinin özetini alip özetini aldıgımız seklinin r^2 degerlerine ulaşmak istiyoruz.
+
+```{r}
+install.packages("tidyverse")
+install.packages("MASS")
+library(MASS)
+library(tidyverse)
+
+mtcars %>%
+  split(.$cyl) %>% #from base R
+  map(~ lm(mpg ~ wt, data = .)) %>%
+  map(summary) %>%
+  map_dbl("r.squared")
+
+```
+
+
