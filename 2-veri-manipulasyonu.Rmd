@@ -2,7 +2,7 @@
 title: "Veri Manipulasyonu"
 output: html_notebook
 editor_options:
-  chunk_output_type: console
+  chunk_output_type: inline
 ---
 
 select(): degisken secimi
@@ -75,5 +75,49 @@ select(df, contains("time")) # time ile ilgili olan degiskenleri seçer
 
 
 
+# 2. Gozlem Islemleri: filter()
 
+```{r}
+
+# day degeri 1 olan gozlemleri seçmek
+filter(df, day == 1)
+
+# dept_time degeri 517'den buyuk, day degeri 1 olan gozlemleri seçmek
+filter(df, dep_time > 517 & day == 1)
+
+# hava yolu sirketlerinden (carrier) ortalamadan daha fazla geç kalan hava yolu sirketlerini bulmak
+a <- filter(df, dep_delay > mean(df$dep_delay, na.rm = TRUE))
+b <-select(a, carrier, dep_delay)
+
+# gecikme sürelerini azalacak sekilde sırala
+arrange(b, desc(dep_delay))
+
+```
+
+## sample_n()
+
+Veri seti üzerinden rastgele istenilen sayıda gözlem seçmemizi sağlar.
+
+```{r}
+
+sample_n(df, 10)
+
+```
+
+## head()
+
+Veri seti içerisinden istedigimiz ilk n gözlemi seçmemizi sağlar.
+
+```{r}
+
+head(df,10)
+```
+
+## slice()
+
+Veri seti içerisinden istedigimiz aralıkta gözlem seçmemizi sağlar.
+
+```{r}
+slice(df, 100:110)
+```
 
