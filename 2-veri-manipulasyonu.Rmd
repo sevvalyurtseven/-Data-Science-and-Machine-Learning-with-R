@@ -1,0 +1,79 @@
+---
+title: "Veri Manipulasyonu"
+output: html_notebook
+editor_options:
+  chunk_output_type: console
+---
+
+select(): degisken secimi
+filter(): gozlem secimi
+mutate(): degisken olusturma
+summarise(): ozet istatistikler
+group_by(): gruplama
+left_join(): birlestirme islemleri
+summarise(): veri özetleme
+
+
+
+#0. Veri Seti
+
+nycflights13 New York City'a ait 2013 yilinin ucus verileri.
+
+```{r}
+
+install.packages("tidyverse")
+library(tidyverse)
+
+install.packages("nycflights13")
+library(nycflights13)
+
+install.packages("dplyr")
+library(dplyr)
+
+df <- flights
+```
+
+Burada dep_delay, day, carrier ve distance degiskenlerini sectik. Daha sonra dep_delay değeri 10'dan büyük olanları filtreledik. Daha sonra olusan veriyi carrier degiskenine göre grupladık.Ve hangi hava yolu sirketinden (carrier) kaç tane var? Ortalama ne kadar geç kalmışlar(dep_delay) ve ortalama ne kadar uçmuşlar'ı olusturduk. En son da olusan veri setini sıraladık (buyukten kucuge)
+
+```{r}
+df %>%
+  select(dep_delay, day, carrier, distance) %>%
+  filter(dep_delay > 10) %>%
+  group_by(carrier) %>%
+  summarise(n = n(),
+            ortalama = mean(dep_delay),
+            mean(distance)) %>%
+  arrange(desc(ortalama))
+
+```
+
+
+#1. Degisken Islemleri: select()
+
+select() fonksiyonunu degisken secimi için kullanırız.
+
+```{r}
+
+str(df) # veri setine bakalım
+
+a <- select(df, dep_delay, month, day, dep_time)
+
+b <- select(df, 1:4) # ilk 4 degiskenin tüm gözlemlerini verir!
+
+select(df, -c(dep_delay, month, day, dep_time)) # girilen degiskenler dısındaki değişkenleri seçer
+```
+
+
+## contains()
+
+Kendisine girilen ifadeye göre arama yapıp fonksiyonların içerisinde bulma gerçekleştirir. contains() fonksiyonu select() fonksiyonu ile birlikte çalışır.
+
+
+```{r}
+select(df, contains("time")) # time ile ilgili olan degiskenleri seçer
+```
+
+
+
+
+
