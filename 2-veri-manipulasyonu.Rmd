@@ -121,3 +121,35 @@ Veri seti içerisinden istedigimiz aralıkta gözlem seçmemizi sağlar.
 slice(df, 100:110)
 ```
 
+# 3. Degisken Olusturma Islemleri
+
+Var olan veri setleri üzerindeki degiskenleri kullanarak yeni değişkenler olusturmak
+
+## mutate()
+
+Degisken olusturmak için kullanılır.
+
+```{r}
+
+mutate(df,
+  kazanc = arr_delay - dep_delay, 
+  hiz = distance / arr_time *60,
+  yeni = kazanc / hiz)
+
+```
+
+
+## transmute()
+
+Sadece olusturdugumuz yeni verileri önümüze getirir.
+
+```{r}
+
+transmute(df,
+  kazanc = arr_delay - dep_delay, 
+  hiz = distance / arr_time *60,
+  yeni = kazanc / hiz)
+
+```
+
+
