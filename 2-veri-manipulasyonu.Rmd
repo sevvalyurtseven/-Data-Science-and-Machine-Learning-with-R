@@ -207,3 +207,30 @@ table2 %>%
   spread(key = "type", value = "count")
 ```
 
+
+## Separating ve Unite
+
+## Seperating
+
+Bir degiskende 2 farklı deger olması durumu. Bu durumda 2 değer icin de ayrı ayrı degisken tanımlanmalı
+
+```{r}
+table3
+
+table3 %>%
+  separate(rate, into = c("var1", "var2"))
+```
+
+## Unite
+
+Separating'in tersi. 2 degiskenin değerleri ile tek değişken değeri olusturmaya yardımcı olur.
+
+```{r}
+table5
+
+table5 %>%
+  unite(new, century, year, sep = "")
+
+```
+
+
