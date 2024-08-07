@@ -152,4 +152,25 @@ transmute(df,
 
 ```
 
+# 4 - 5 Gruplama ve Veri Ozetleme
+
+Veri setlerini bazı kategorik degiskenler kırılımını gruplara ayırıp daha sonra gruplara ayırdıgımız bu yapı üzerinden özet istatistikleri almaya calısacagız.
+
+mean() : ortalama
+median() : medyan
+sum() : toplama
+sd() : standart sapma
+var() : varyans
+summarise() : özet istatistikleri verir
+
+```{r}
+
+df %>%
+  group_by(carrier) %>%
+  summarise(adet = n(),
+            ortalama = mean(dep_delay, na.rm = TRUE),
+            medyan = median(dep_delay, na.rm = TRUE),
+            sd = sd(dep_delay, na.rm = TRUE))
+
+```
 
