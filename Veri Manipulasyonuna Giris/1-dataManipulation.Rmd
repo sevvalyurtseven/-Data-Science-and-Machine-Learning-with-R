@@ -1,0 +1,115 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+## VERİ MANİPULASYONU
+
+Veriyi amaca yönelik olarak okunabilir ve düzenli hale getirmek
+
+### Tidy Tools Manifestosu 4 Prensibi
+
+- [ ] Mümkün olduğu kadar var olan veri yapılarını kullan
+- [ ] Pipe ile basit fonksiyonlar oluştur: Büyük problemleri küçük parçalara ayırarak çöz
+- [ ] Fonksiyonel programlamayı benimse
+- [ ] İnsanlar için tasarla: Temiz ve okunabilir kod yaz
+
+### Pipe Operatörü
+
+%>%
+
+## dplyr nedir?
+
+A Grammar of Data Manipulation
+
+### Cognitive Process
+
+1. Take the ydat dataset, then
+2. filter() for genes in the leucine biosynthesis pathway, then
+3. group_by() the limiting nutrient, then
+4. summarize() to correlate rate and expression, then
+5. mutate() to round r to two digits, then
+6. arrenge() by rounded correlation coefficients.
+
+### The Old Way
+
+```{r}
+
+arrange(
+  mutate(
+    summarize(
+      group_by(
+        filter(ydat, bp=="leucine biosynthesis"),
+        nutrient),
+      r=cor(rate, expression)),
+    r=round(r,2)),
+  r)
+
+```
+
+
+### The dplyr Way
+
+```{r}
+
+ydat %>%
+  
+  filter(bp==“leucine biosynthesis”) %>%
+  group_by(nutrient) %>%
+  summarise(r=cor(rate, expression)) %>%
+  mutate(r=round(r,2)) %>%
+  arrange(r)
+
+```
+
+## %>% Example
+
+### In Base R:
+
+```{r}
+
+# new table
+gtbl1 = gtbl[gtbl$continent == "Asia",]
+
+#reassignment
+gtbl2 = gtbl1[gtbl1$lifeExp < 65,]
+
+# functions in brackets
+gtbl3 = gtbl2[sample(1:dim(gtbl2)[1], size = 10),]
+
+gtbl3
+
+```
+
+
+### With pipes + dplyr
+
+```{r}
+
+gtbl %>%
+  
+  filter(continent == "Asia" & lifeExp < 65) %>%
+  sample_n(10)
+```
+
+
+### Getting complicated, but readable
+
+```{r}
+
+gtbl %>%
+  
+  filter(year > 1960) %>%
+  group_by(country) %>%
+  sample_n(10) %>%
+  mutate(pop_exp = pop / lifeExp,
+         sampled = TRUE)
+```
+
+
+## Tidy Data - tidyr
+
+variables : sutunlar
+observations : satirlar
+values : sutun ve satirdaki gözlemlerin hepsi!
+
