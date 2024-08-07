@@ -174,3 +174,26 @@ df %>%
 
 ```
 
+# 6. TIDY DATA
+
+Satır elemanlarının bir gözlemi, sütun elemanlarının da bir değişkeni temsil ettiği ve kesisimlerin de gözlem birimlerinin degerlerinin yer aldıgı veri tipi demektir. 
+
+## Gathering ve Spreading 
+
+## Gathering
+
+Sık karsılasılan problemlerden birisi değişken isimlerinin olması gerektiği yerde değişken değerlerinin olması
+
+```{r}
+
+library(tidyverse)
+table4a %>%
+  gather("1999", "2000", key = "year", value = "cases")
+```
+
+```{r}
+
+table4b %>%
+  gather("1999", "2000", key = "year", value = "cases")
+```
+
