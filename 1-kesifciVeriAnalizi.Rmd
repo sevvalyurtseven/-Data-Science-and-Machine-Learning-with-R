@@ -377,4 +377,55 @@ ggplot(diamonds, aes(x = price, y = cut, fill = cut)) +
 
 ```
 
+## Interaktif Histogram
+
+```{r}
+install.packages("plotly")
+library(plotly)
+```
+
+
+```{r}
+
+# Normal dağılımlı bir kitleden 500 tane sayı çekmiş olalım. Bu histogramda üzerine gelindiğinde aralıkların değerlerini verir.
+
+g <- plot_ly(x = rnorm(500), type = "histogram")
+g
+
+# Üst üste interaktif histogram olusturmak istediğimizi varsayalım. 
+
+g <- plot_ly(x = rnorm(500), opacity = 0.6, type = "histogram") %>%
+  add_trace(x = rnorm(500) + 1) %>%
+  layout(barmode =  "overlay")
+g
+```
+
+# Aynı grafik fakat daha profesyonel bir görsellestirme
+
+```{r}
+library(plotly)
+
+# İlk histogram verileri
+data1 <- rnorm(500)
+# İkinci histogram verileri
+data2 <- rnorm(500) + 1
+
+# Histogramları oluşturma ve üst üste bindirme
+g <- plot_ly() %>%
+  add_histogram(x = data1, name = "Dataset 1", opacity = 0.6, marker = list(color = 'blue')) %>%
+  add_histogram(x = data2, name = "Dataset 2", opacity = 0.6, marker = list(color = 'red')) %>%
+  layout(
+    title = "Overlayed Histograms of Two Normal Distributions",
+    xaxis = list(title = "Value"),
+    yaxis = list(title = "Count"),
+    barmode = "overlay",
+    bargap = 0.1,
+    legend = list(x = 0.8, y = 0.9)
+  )
+
+# Grafiği gösterme
+g
+
+```
+
 Kaynaklar: r for data science, r-graph-gallery.com, modern r programlama egitimi
