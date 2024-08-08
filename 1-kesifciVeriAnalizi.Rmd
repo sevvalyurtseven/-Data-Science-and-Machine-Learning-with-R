@@ -81,3 +81,25 @@ levels(df$class) # kategorik degiskenin kategorilerini verir
 
 ```
 
+
+## Surekli ve Kategorik Degiskenler Icın Direkt Detaylar
+
+```{r}
+install.packages("funModeling")
+library(funModeling)
+
+```
+
+
+```{r}
+
+# SUREKLI DEGISKENLER ICIN
+
+profiling_num(df) #özet istatistikleri verir
+plot_num(df) # her degiskene ait histogram grafigi çizer
+
+# KATEGORIK DEGISKENLER ICIN
+
+freq(df) # özet istatistikleri + grafik verir
+```
+
