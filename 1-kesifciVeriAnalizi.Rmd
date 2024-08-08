@@ -103,3 +103,43 @@ plot_num(df) # her degiskene ait histogram grafigi çizer
 freq(df) # özet istatistikleri + grafik verir
 ```
 
+## Surekli ve Kategorik Degisken Detaylari
+
+```{r}
+library(psych)
+library(Hmisc)
+library(dplyr)
+install.packages("pastecs")
+library(pastecs)
+```
+
+
+```{r}
+# SUREKLI DEGISKENLER ICIN
+
+# describe() fonksiyonu ile betimleyici istatistiklere erisiriz.
+
+# Hmisc kütüphanesindeki describe() fonksiyonu eksik gozlemleri, özgün gözlemleri, en kücük ve en büyük gözlemleri de bize sunar.
+
+# pastecs kütüphanesindeki stat.desc() fonksiyonu bize güven aralıgını da verir.
+
+psych::describe(mpg$displ)
+Hmisc::describe(mpg$displ)
+
+stat.desc(mpg)
+
+# KATEGORİK DEGISKEN ICIN
+
+# describe.by() fonksiyonu verilen bir kategorik degisken kırılımında veri setini özetler.
+
+# bu fonksiyonu uygulamak icin ilk olarak bir kategorik degisken secelim. (trans) Bu kategorik degiskene iliskin sürekli degiskenler secelim.
+
+df <- select(mpg, trans, cty, cyl, hwy)
+
+describe.by(df, df$trans)
+
+# trans degiskeninin butun sınıfları için bir kırılım olusturmus oldu. Bu sayede trans kategorik degiskeninin her sınıfı icin surekli degiskenlerin degerlerinin degiskenlik gösterdigini görebiliriz. Cünkü Ortalama ve medyan değerleri birbirinden farkli
+
+
+```
+
