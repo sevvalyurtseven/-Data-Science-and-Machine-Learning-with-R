@@ -1,0 +1,53 @@
+---
+title: "Kesifci Veri Analiz"
+output: html_notebook
+editor_options: 
+  chunk_output_type: inline
+---
+
+# Iste Veri Onumde Simdi Ne Yapacagim?
+
+Iste veri onumde simdi ne yapacagim?
+
+https://www.veribilimiokulu.com/iste-veri-onumde-simdi-ne-yapacagim/
+
+1. Amac Ne?
+2. Tidy Data Sureci
+3. Degisken Turlerinin Belirlenmesi ve Ayarlanmasi
+4. Ozet Istatistikler: Veri Setinin Temel Yapisinin Gosterilmesi
+5. Kesifci Veri Analizi
+
+```{r}
+
+library(tidyverse)
+
+```
+
+## Degisken Turlerinin Ayarlanmasi
+
+Burada mpg veri setini ele alalım. mpg veri setindeki "class" degiskeninin türünün "character" olarak girildigini görüyoruz. Bu class degiskeni aslında bir aracin kac kapı oldugunu bize söylüyor. Yani aracın fiyatı odak noktası oldugunda ayırt edici bir özellik. Dolayısıyla bu değişkenin "kategorik" bir değişken olması gerekiyor.
+
+```{r}
+
+df <- mpg
+
+# class degiskenini characterden factor'e cevirelim
+df$class <- factor(df$class)
+
+glimpse(df) # bakalim gercekten factor oldu mu?
+
+# sürekli bir degiskeni kategorik degiskene dönüstürmek istiyorum
+
+# displ degiskeninde eger surekli degiskenin degeri 2den buyuk ise 1 degilse 0 yap
+df$disp_yeni <- ifelse(df$displ > 2, 1, 0)
+
+# degiskeni kategorik yaptik fakat tipi double. Düzenleyelim
+df$disp_yeni <- factor(df$disp_yeni)
+
+# cut fonksiyonu 
+#             : 1. arguman: üzerinde degisiklik yapmak istedigim degisken
+#           : 2. arguman : yapılacak olan donusumdeki sınırlar
+              
+df$disp_iki <- cut(df$displ, breaks = c(0,2, max(df$displ)))
+```
+
