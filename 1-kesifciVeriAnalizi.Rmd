@@ -179,7 +179,9 @@ library(xplorerr)
 app_descriptive()
 ```
 
-## Bar Plot ( Sutun Grafik )
+## Dagilim - Bar Plot ( Sutun Grafik )
+
+Kategorik degiskenlerin frekanslarını gözlemlemek icin kullanılır.
 
 ```{r}
 
@@ -209,6 +211,126 @@ ggplot(df, aes(cut, fill = color)) +
   ggtitle("Bu yazı ana baslık yazısıdır") +
   xlab("Pırlanta Kaliteleri") +
   ylab("Gözlenme Sıklıkları")
+
+```
+
+## Dagılım - Histogram ve Yogunluk 
+
+## Histogram
+
+Bir sürekli degiskeni görsellestirmek istedigimizde en sık kullanılan görsellestirme tekniklerinden birisidir.
+
+```{r}
+
+glimpse(df)
+
+# price degiskenini görsellestirelim
+
+ggplot(df, aes(price)) + 
+  geom_histogram()
+  
+# binwidth = 1000 ile histogramın aralıkları genişletebiliriz
+
+ggplot(df, aes(price)) + 
+  geom_histogram(binwidth = 1000)
+```
+
+## Yoğunluk
+
+```{r}
+
+glimpse(df)
+
+# price degiskenini görsellestirelim
+
+ggplot(df, aes(price)) + 
+  geom_density()
+
+```
+
+## Yogunluk ve Histogram Grafiği
+
+ggplot kullanırken birden fazla geometrik nesneyi birlikte kullanmak için bunların ölçeklerinin aynı olması gerekir. Bunun için aes(y = after_stat(density)) yazmak yeterlidir.
+
+```{r}
+
+ggplot(df, aes(price)) +
+  geom_histogram(aes(y = after_stat(density))) +
+  geom_density()
+
+# saydamlık ekleyelim. yogunluk grafigini turuncu yapalim
+
+ggplot(df, aes(price)) +
+  geom_histogram(aes(y = after_stat(density))) +
+  geom_density(alpha = .3, fill = "orange")
+
+```
+
+# Yukarıdaki kod mantıgında fakat görsel açıdan daha profesyonel hali
+
+```{r}
+library(ggplot2)
+
+# diamonds veri setini kullanarak grafiği oluşturma
+ggplot(diamonds, aes(x = price)) +
+  geom_histogram(aes(y = after_stat(density)), bins = 30, fill = "blue", color = "black", alpha = 0.6) +
+  geom_density(alpha = 0.3, fill = "orange") +
+  labs(
+    title = "Distribution of Diamond Prices with Density Overlay",
+    x = "Price (USD)",
+    y = "Density"
+  ) +
+  scale_y_continuous(labels = scales::number_format(accuracy = 0.0001)) + # Yoğunluk eksenini daha anlamlı hale getir
+  theme_minimal() +
+  theme(
+    plot.title = element_text(hjust = 0.5, size = 16, face = "bold"),
+    axis.title = element_text(size = 12),
+    axis.text = element_text(size = 10),
+    legend.position = "none"
+  )
+
+```
+
+Bir kategorik bir de sürekli bir değişkenimin oldugunu varsayalım. Amaç sürekli değişken kırılımında histogramları göstermek olsun.
+
+```{r}
+
+ggplot(df, aes(price, fill = cut)) +
+  geom_histogram() 
+
+# Bu kırılımların üst üste olması dağınık bir görünüm sunuyor. facet_grid ile tüm kategorileri düzgün bir şekilde ayırabiliriz.
+
+ggplot(df, aes(price)) +
+  geom_histogram() +
+  facet_grid((cut ~.))
+
+```
+
+# Görsel Acidan daha profesyonel bir kod
+
+```{r}
+library(ggplot2)
+library(datasets)
+
+# diamonds veri setini kullanarak grafiği oluşturma
+ggplot(diamonds, aes(x = price, fill = cut)) +
+  geom_histogram(binwidth = 500, alpha = 0.7, position = "identity") +
+  facet_grid(cut ~ .) +
+  labs(
+    title = "Diamond Prices by Cut",
+    x = "Price (USD)",
+    y = "Count",
+    fill = "Cut"
+  ) +
+  theme_minimal() +
+  theme(
+    plot.title = element_text(hjust = 0.5, size = 16, face = "bold"),
+    axis.title = element_text(size = 12),
+    axis.text = element_text(size = 10),
+    strip.text = element_text(size = 12, face = "bold"),
+    legend.position = "none"
+  ) +
+  scale_fill_brewer(palette = "Set3")
 
 ```
 
