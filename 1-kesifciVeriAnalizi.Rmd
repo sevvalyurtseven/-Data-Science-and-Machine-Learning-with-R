@@ -334,5 +334,47 @@ ggplot(diamonds, aes(x = price, fill = cut)) +
 
 ```
 
+# Dagilim - Ridgeline
+
+Bir sürekli değişkenin dağılımını iç içe kategorik gruplar içerisinde ele alacağız.
+
+```{r}
+install.packages("ggridges")
+library(ggridges)
+```
+
+```{r}
+ggplot(df, aes(x = price, y = cut, fill = cut)) + 
+  geom_density_ridges() +
+  theme_ridges() +
+  theme(legend.position = "none")
+  
+```
+
+# Yukarıdaki kodun daha profesyonel hali
+
+```{r}
+# Gerekli kütüphaneleri yükleme
+library(ggplot2)
+library(ggridges)
+
+# diamonds veri seti ile ridge plot oluşturma
+ggplot(diamonds, aes(x = price, y = cut, fill = cut)) + 
+  geom_density_ridges(alpha = 0.8, scale = 1.2) + # Yoğunluk eğrilerini ekler ve alpha ile transparanlık ekler
+  scale_fill_brewer(palette = "Set3") + # Renk paleti belirleme
+  labs(
+    title = "Distribution of Diamond Prices by Cut",
+    x = "Price (USD)",
+    y = "Cut"
+  ) +
+  theme_ridges(center = TRUE) + # Ridge plot teması uygulama
+  theme(
+    legend.position = "none", # Legendi kaldırma
+    plot.title = element_text(hjust = 0.5, size = 16, face = "bold"), # Başlık stilini ayarlama
+    axis.title = element_text(size = 12),
+    axis.text = element_text(size = 10)
+  )
+
+```
 
 Kaynaklar: r for data science, r-graph-gallery.com, modern r programlama egitimi
