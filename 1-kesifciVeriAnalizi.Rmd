@@ -143,3 +143,41 @@ describe.by(df, df$trans)
 
 ```
 
+
+## Data Frame'lerin Interaktif Kesfi
+
+Karmasik veriler icin kullanılabilecek görseller
+
+```{r}
+install.packages("d3Tree")
+library(d3Tree)
+```
+```{r}
+
+# d3tree fonksiyonu, hiyerarşik veri yapılarını görselleştirmek için kullanılır. Bu tür görselleştirmeler, veri kümelerinin hiyerarşik ilişkilerini ve yapısını anlamak için oldukça etkilidir.
+
+# rootname : veri setinin ismi
+# struct : yapısı cıkacak veri seti
+# layout : tema
+
+d3tree(list(root = df2tree(rootname = "Titanic",
+                           struct = as.data.frame(Titanic)),
+            layout = "collapse"))
+```
+
+```{r}
+install.packages("devtools")
+library(devtools)
+install.packages("haven")
+library(haven)
+devtools::install_github("rsquaredacademy/xplorerr")
+library(xplorerr)
+
+```
+
+```{r}
+app_descriptive()
+```
+
+
+Kaynaklar: r for data science, r-graph-gallery.com, modern r programlama egitimi
