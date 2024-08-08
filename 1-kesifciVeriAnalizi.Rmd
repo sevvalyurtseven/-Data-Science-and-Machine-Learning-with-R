@@ -179,5 +179,38 @@ library(xplorerr)
 app_descriptive()
 ```
 
+## Bar Plot ( Sutun Grafik )
+
+```{r}
+
+# Kategorik degiskenlerimizi görsellestirmek icin kullandıgımız veri setimiz diamond
+df <- diamonds
+
+# Degisken türlerini incelemek icin glimpse() fonksiyonunu kullandık.
+glimpse(df)
+
+# Bar Plot
+
+# ggplot(veriSeti, aes(ilgilendigimiz degisken)) + geom_bar() 
+# Kategorik degiskenin sınıflarının gözlenme sayilarini verir.
+
+ggplot(df, aes(cut)) +
+  geom_bar()
+
+# fill = color  ile cut degiskeninin icindeki sınıflarda color degiskeninin sınıflarından kacar tane var görebiliyoruz.
+
+ggplot(df, aes(cut, fill = color)) +
+  geom_bar()
+
+# position = position_dodge() ile 2 kategorik degiskenin grafiklerini birbirinden ayırarak daha okunaklı bir görsel hazırlanır. 
+
+ggplot(df, aes(cut, fill = color)) +
+  geom_bar(position = position_dodge()) +
+  ggtitle("Bu yazı ana baslık yazısıdır") +
+  xlab("Pırlanta Kaliteleri") +
+  ylab("Gözlenme Sıklıkları")
+
+```
+
 
 Kaynaklar: r for data science, r-graph-gallery.com, modern r programlama egitimi
