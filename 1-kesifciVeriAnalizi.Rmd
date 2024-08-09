@@ -531,11 +531,22 @@ ggplot(diamonds, aes(x = cut, y = price, fill = cut)) +
 
 ```
 
-Bu grafikte elmasların cut kategorisine göre nasıl fiyatlandığını incelediğimizde birkaç önemli nokta öne çıkıyor. İlk olarak, "Fair" kesimi, fiyatlarının daha dar bir aralıkta toplandığını ve bu nedenle homojen bir dağılıma sahip olduğunu gösteriyor. Ancak, bu dağılım biraz çarpık görünüyor, yani fiyatlar ortalamadan sapmış durumda. Diğer yandan, "Good" kesimi, hem daha simetrik hem de daha düzenli bir yapıya sahip. Bu düzenlilik, "Good" kesim elmasların piyasada daha standart bir değere sahip olduğunu düşündürebilir.
 
-"Premium" kesimi ise tamamen farklı bir resim sunuyor. Bu kategorideki elmasların fiyatları oldukça geniş bir aralıkta değişiyor, bu da Premium kesiminde kalite veya boyutta çeşitliliğin daha fazla olduğunu işaret ediyor olabilir. Bu geniş varyans, farklı müşteri segmentlerine hitap eden çeşitli elmasların bu kategoride toplandığını gösterebilir.
+Bu box plot, elmasların kesim kalitesine (cut) göre fiyatlarının nasıl dağıldığını gösteriyor. Grafikteki her bir kutu, ilgili kesim kategorisindeki elmas fiyatlarının dağılımını özetler.
 
-Son olarak, "Ideal" kesimine baktığımızda, bu kategorinin çarpıklığının oldukça belirgin olduğunu görüyoruz. "Ideal" kesimindeki bazı elmaslar, ortalamadan oldukça saparak çok daha yüksek veya düşük fiyatlara sahip olabiliyor. Bu durum, "Ideal" kesim elmaslarının fiyatının, pazar dinamikleri veya müşteri tercihleri tarafından güçlü bir şekilde etkilendiğini gösteriyor. Grafikteki maksimum fiyatlar dışındaki gözlemler aykırı değer olarak kabul edilebilir.
+# Medyan Değerler:
+Medyan değer, her kutunun içindeki kalın yatay çizgiyle gösterilir. Grafikteki medyan fiyatlar incelendiğinde, "Premium" kesim kategorisinin medyanının en yüksek olduğu görülüyor. "Fair", "Good", "Very Good", ve "Ideal" kesimleri ise birbirine oldukça yakın medyan değerlere sahip. Bu, medyan fiyat açısından belirgin bir fark olmadığını ancak "Premium" kesimlerin genelde daha yüksek fiyatlara sahip olduğunu gösterebilir.
 
-Genel olarak, cut kategorisinin elmas fiyatları üzerinde belirgin bir etkisi olduğu ortaya çıkıyor. Kesim kalitesi arttıkça fiyatların da genel olarak yükseldiği, ancak bu artışın aynı zamanda varyans ve çarpıklık üzerinde de etkili olduğu görülüyor. "Ideal" ve "Premium" gibi yüksek kaliteli kesimlerde fiyat aralığı genişlerken, daha düşük kaliteli kesimlerde (örneğin "Fair"), fiyatlar daha dar bir aralıkta toplanmış durumda.
+# Varyans (Dağılım Aralığı):
+Kutu uzunlukları, fiyatların dağılım aralığını temsil eder. "Premium" kesimi, en geniş kutuya sahip olup, fiyatların en geniş aralıkta dağıldığını gösteriyor. Bu da "Premium" kesimin fiyat aralığının daha geniş olduğunu ve bu kesim kategorisinde hem daha düşük hem de daha yüksek fiyatlı elmasların bulunduğunu ima eder. Diğer kesim kategorileri ("Fair", "Good", "Very Good", "Ideal") daha dar bir aralıkta toplanmış gibi görünüyor.
+
+# Aykırı Değerler:
+Kırmızı noktalar, her bir kesim kategorisi için aykırı değerleri gösterir. Aykırı değerler, özellikle "Very Good", "Premium" ve "Ideal" kesimlerinde daha yoğun. Bu, bu kategorilerde bazı elmasların ortalamadan oldukça farklı (daha yüksek) fiyatlarla satıldığını gösterir. "Fair" ve "Good" kesimlerinde de aykırı değerler mevcut, ancak bu kategorilerdeki aykırı değerlerin sayısı daha az ve fiyatlar nispeten daha düşük aralıklarda kalmış.
+
+# Çarpıklık:
+"Fair" ve "Ideal" kesimlerinde, kutunun alt yarısı ile üst yarısı arasında bir dengesizlik olduğu görülüyor, bu da bu kategorilerin fiyat dağılımlarının çarpık olduğunu gösterir. Özellikle "Ideal" kesimi, fiyat dağılımının üst ucunda daha fazla yoğunlaşmış gibi görünüyor, yani birkaç yüksek fiyatlı elmas bu kategoride fiyat ortalamasını yukarı çekiyor.
+
+# Sonuç:
+Bu box plot, elmas fiyatlarının kesim kalitesine göre nasıl dağıldığını gösteriyor. "Premium" kesim, en geniş fiyat dağılımına ve en yüksek medyana sahipken, "Ideal" kesim yüksek kaliteli olmasına rağmen, medyanı daha düşük ve dağılımı daha çarpık bir yapı sergiliyor. Fiyatlar arasında geniş bir varyans ve birçok aykırı değer bulunuyor, bu da elmas fiyatlarının kesim kalitesine göre değişkenlik gösterdiğini ortaya koyuyor.
+
 Kaynaklar: r for data science, r-graph-gallery.com, modern r programlama egitimi
