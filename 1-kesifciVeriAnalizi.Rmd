@@ -428,4 +428,70 @@ g
 
 ```
 
+## Dagilim - Çoklu Frekans
+
+Sürekli degisken icin frekans grafiği. Frekans dağılımı sürekli ve kategorik değişkenler birlikte gösterildiğinde daha anlamlı oluyor.
+
+```{r}
+# Bir sürekli degiskenin farklı kategorik degiskenler bazında dagılımları farklı olabileceğinden dolayı ölçeklerde bozulma meydana gelebiliyor. Bundan dolayı y = after_stat(density) ile y eksenine düzeltme yapmamız gerekiyor.
+
+# aes(colour = cut) burada kırmak istediğimiz frekansları ifade etmemiz gerekiyor. Bu kırılımı ifade etmek için colour argumanı kullanılmaktadır.
+
+ggplot(df, aes(price, y = after_stat(density))) +
+  geom_freqpoly(aes(colour = cut), binwidth = 500)
+```
+
+## Yukarıdaki grafiğin daha estetik hali : 
+
+```{r}
+library(ggplot2)
+
+# diamonds veri seti ile frekans poligonu oluşturma
+ggplot(diamonds, aes(x = price, y = after_stat(density))) +
+  geom_freqpoly(aes(colour = cut), binwidth = 500, size = 1.2) + # Bin genişliğini ayarla ve çizgi kalınlığını artır
+  labs(
+    title = "Distribution of Diamond Prices by Cut",
+    x = "Price (USD)",
+    y = "Density",
+    colour = "Cut"
+  ) +
+  scale_y_continuous(labels = scales::number_format(accuracy = 0.0001)) + # Yoğunluk eksenini daha okunabilir hale getir
+  scale_colour_brewer(palette = "Set1") + # Renk paleti belirle
+  theme_minimal() +
+  theme(
+    plot.title = element_text(hjust = 0.5, size = 16, face = "bold"), # Başlık stilini ortala ve büyüt
+    axis.title = element_text(size = 12),
+    axis.text = element_text(size = 10)
+  )
+
+```
+
+## Aynı Grafiğin Yoğunluk Grafiği ile ifade edilmesi: 
+
+Genellikle yoğunluk grafiğini içi dolu kullanırız. Bu durumda ön taraftaki katman arka taraftaki sınıfları kapattıgından dolayı dağılım gözükemeyebiliyor. Bu yüzden Frekans Poligonuna ihtiyaç duyarız.
+
+```{r}
+library(ggplot2)
+library(scales)  # number_format fonksiyonunu kullanmak için
+
+# diamonds veri seti ile yoğunluk grafiği oluşturma
+ggplot(diamonds, aes(x = price, y = after_stat(density), colour = cut)) +
+  geom_density(size = 1.2, adjust = 1) + # Adjust parametresi yoğunluk eğrisinin pürüzsüzlüğünü ayarlar
+  labs(
+    title = "Distribution of Diamond Prices by Cut",
+    x = "Price (USD)",
+    y = "Density",
+    colour = "Cut"
+  ) +
+  scale_y_continuous(labels = number_format(accuracy = 0.0001)) + # Yoğunluk eksenini daha okunabilir hale getir
+  scale_colour_brewer(palette = "Set1") + # Renk paleti belirle
+  theme_minimal() +
+  theme(
+    plot.title = element_text(hjust = 0.5, size = 16, face = "bold"), # Başlık stilini ortala ve büyüt
+    axis.title = element_text(size = 12),
+    axis.text = element_text(size = 10)
+  )
+
+```
+
 Kaynaklar: r for data science, r-graph-gallery.com, modern r programlama egitimi
