@@ -549,4 +549,49 @@ Kırmızı noktalar, her bir kesim kategorisi için aykırı değerleri gösteri
 # Sonuç:
 Bu box plot, elmas fiyatlarının kesim kalitesine göre nasıl dağıldığını gösteriyor. "Premium" kesim, en geniş fiyat dağılımına ve en yüksek medyana sahipken, "Ideal" kesim yüksek kaliteli olmasına rağmen, medyanı daha düşük ve dağılımı daha çarpık bir yapı sergiliyor. Fiyatlar arasında geniş bir varyans ve birçok aykırı değer bulunuyor, bu da elmas fiyatlarının kesim kalitesine göre değişkenlik gösterdiğini ortaya koyuyor.
 
+## Dagilim - Violin
+
+Violin grafiği, verilerin dağılımını ve yoğunluğunu görselleştiren bir grafik türüdür. Box plot'a benzer şekilde, verilerin merkezi eğilimini, yayılımını ve olası aykırı değerlerini gösterir. Ancak, violin grafiği ek olarak veri dağılımının yoğunluğunu da simetrik olarak gösterir.
+
+## Temel Bileşenler:
+
+1. *Yoğunluk Eğrisi (Density Curve):* Violin grafiğinin her iki tarafındaki şekil, verilerin belirli bir değerde ne kadar yoğunlaştığını gösterir. Bu şekil, bir histogramın pürüzsüz bir versiyonu gibi düşünülebilir.
+
+*Geniş Kısımlar:* Verilerin bu değer etrafında daha fazla toplandığını gösterir.
+
+*Dar Kısımlar:* Verilerin bu değer etrafında daha az toplandığını gösterir.
+
+
+2. *Merkez Çizgisi:* Grafikte ortada bir çizgi bulunur (violin grafiğinde her zaman belirgin olmayabilir). Bu çizgi, verilerin medyanını veya merkez eğilimini gösterebilir.
+
+```{r}
+
+ggplot(df, aes(x = cut, y = price, fill = cut)) +
+  geom_violin(alpha = 0.6)
+```
+
+# Daha Estetik bir Violin Grafiği 
+
+```{r}
+library(ggplot2)
+
+# diamonds veri seti ile violin grafiği oluşturma
+ggplot(diamonds, aes(x = cut, y = price, fill = cut)) +
+  geom_violin(alpha = 0.6, trim = FALSE) + # trim = FALSE ile tam dağılımı göster
+  labs(
+    title = "Distribution of Diamond Prices by Cut",
+    x = "Cut",
+    y = "Price (USD)"
+  ) +
+  scale_fill_brewer(palette = "Set3") + # Renk paleti belirle
+  theme_minimal() +
+  theme(
+    plot.title = element_text(hjust = 0.5, size = 16, face = "bold"), # Başlık stilini ortala ve büyüt
+    axis.title = element_text(size = 12),
+    axis.text = element_text(size = 10)
+  )
+
+```
+
+
 Kaynaklar: r for data science, r-graph-gallery.com, modern r programlama egitimi
