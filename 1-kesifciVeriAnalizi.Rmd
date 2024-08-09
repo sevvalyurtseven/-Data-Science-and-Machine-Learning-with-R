@@ -494,4 +494,48 @@ ggplot(diamonds, aes(x = price, y = after_stat(density), colour = cut)) +
 
 ```
 
+
+## Dagilim - Box Plot
+
+Sürekli degiskenlerin görsellestirilmesinde kullanılmaktadır. Aynı zamanda bir değişkendeki aykırı gözlemlerin ne oldugunun tanımı yapılmak istendiğinde basvurulur.
+
+```{r}
+
+ggplot(df, aes(x = cut, y = price, fill = cut)) +
+  geom_boxplot()
+
+```
+
+# Estetik Box Plot : 
+
+```{r}
+
+library(ggplot2)
+
+# diamonds veri seti ile box plot oluşturma
+ggplot(diamonds, aes(x = cut, y = price, fill = cut)) +
+  geom_boxplot(outlier.colour = "red", outlier.shape = 16, outlier.size = 2) + # Aykırı değerleri vurgulama
+  labs(
+    title = "Box Plot of Diamond Prices by Cut",
+    x = "Cut",
+    y = "Price (USD)"
+  ) +
+  scale_fill_brewer(palette = "Set3") + # Renk paleti belirleme
+  theme_minimal() +
+  theme(
+    plot.title = element_text(hjust = 0.5, size = 16, face = "bold"), # Başlık stilini ortala ve büyüt
+    axis.title = element_text(size = 12),
+    axis.text = element_text(size = 10),
+    legend.position = "none" # Legend'i kaldırma (gereksiz, çünkü fill rengi zaten x eksenindeki kategorileri temsil ediyor)
+  )
+
+```
+
+Bu grafikte elmasların cut kategorisine göre nasıl fiyatlandığını incelediğimizde birkaç önemli nokta öne çıkıyor. İlk olarak, "Fair" kesimi, fiyatlarının daha dar bir aralıkta toplandığını ve bu nedenle homojen bir dağılıma sahip olduğunu gösteriyor. Ancak, bu dağılım biraz çarpık görünüyor, yani fiyatlar ortalamadan sapmış durumda. Diğer yandan, "Good" kesimi, hem daha simetrik hem de daha düzenli bir yapıya sahip. Bu düzenlilik, "Good" kesim elmasların piyasada daha standart bir değere sahip olduğunu düşündürebilir.
+
+"Premium" kesimi ise tamamen farklı bir resim sunuyor. Bu kategorideki elmasların fiyatları oldukça geniş bir aralıkta değişiyor, bu da Premium kesiminde kalite veya boyutta çeşitliliğin daha fazla olduğunu işaret ediyor olabilir. Bu geniş varyans, farklı müşteri segmentlerine hitap eden çeşitli elmasların bu kategoride toplandığını gösterebilir.
+
+Son olarak, "Ideal" kesimine baktığımızda, bu kategorinin çarpıklığının oldukça belirgin olduğunu görüyoruz. "Ideal" kesimindeki bazı elmaslar, ortalamadan oldukça saparak çok daha yüksek veya düşük fiyatlara sahip olabiliyor. Bu durum, "Ideal" kesim elmaslarının fiyatının, pazar dinamikleri veya müşteri tercihleri tarafından güçlü bir şekilde etkilendiğini gösteriyor. Grafikteki maksimum fiyatlar dışındaki gözlemler aykırı değer olarak kabul edilebilir.
+
+Genel olarak, cut kategorisinin elmas fiyatları üzerinde belirgin bir etkisi olduğu ortaya çıkıyor. Kesim kalitesi arttıkça fiyatların da genel olarak yükseldiği, ancak bu artışın aynı zamanda varyans ve çarpıklık üzerinde de etkili olduğu görülüyor. "Ideal" ve "Premium" gibi yüksek kaliteli kesimlerde fiyat aralığı genişlerken, daha düşük kaliteli kesimlerde (örneğin "Fair"), fiyatlar daha dar bir aralıkta toplanmış durumda.
 Kaynaklar: r for data science, r-graph-gallery.com, modern r programlama egitimi
